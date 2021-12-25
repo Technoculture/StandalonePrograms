@@ -6,33 +6,33 @@
 #define HOME 90
 #define CHAMBER1POS  0
 #define CHAMBER2POS 180
-#define BAUDRATE 115200
+#define BAUDRATE 9600
 const int thermocouple = A2;
 Servo myservo[2];
 
 int adc_val;
 float y;
 int temperature;
-volatile byte flag = HIGH;
+volatile byte flag = LOW;
 void InterruptFunc();
 
 void setup() 
 {
 pinMode(SERVOPIN1, OUTPUT);
 pinMode(SERVOPIN2, OUTPUT);
-pinMode(5, INPUT);
+pinMode(8, INPUT);
 myservo[0].attach(SERVOPIN1);
 myservo[1].attach(SERVOPIN2);
 myservo[0].write(HOME);
 myservo[1].write(HOME);
 Serial.begin(BAUDRATE);
-attachInterrupt(digitalPinToInterrupt(5), InterruptFunc, FALLING);
+attachInterrupt(digitalPinToInterrupt(8), InterruptFunc, FALLING);
 
 }
 
 void loop() 
 {
-  if(flag == HIGH)
+  if(flag == 1)
   {
    Serial.println("flag =1");     //////////////////////////////////////////////
            myservo[0].write(CHAMBER1POS);         //enter in chamber 1
@@ -53,8 +53,8 @@ void loop()
 
            else                               
             {
-               Serial.print("Chamber 1 temp");      //else print///////////////////////
-               Serial.println(temperature);                //////////////////////////////
+               Serial.println("Chamber 1 temp");      //else print///////////////////////
+               Serial.print(temperature);                //////////////////////////////
 
                myservo[0].write(CHAMBER2POS);             //move to chamber two
                myservo[1].write(CHAMBER2POS);
