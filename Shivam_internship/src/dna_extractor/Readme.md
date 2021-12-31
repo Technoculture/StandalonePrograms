@@ -7,6 +7,8 @@
 * To set Servo motors at different angles based on the chamber position
 * To take Six readings by dipping the swab Sample into 6 chambers for 10 seconds
 
+### Process Flow
+![algo](https://user-images.githubusercontent.com/95620523/147822482-3bb8857a-dc14-493b-9ee1-0c39b5481450.jpg)
 
 
 #### COMPONENTS
@@ -31,4 +33,5 @@
 |            10            | Servo Motor2 Signal Pin         |
 
 ### OUTPUT 
+![Capture](https://user-images.githubusercontent.com/95620523/147822490-8325db6c-8536-4852-8a3b-80f9c380cd34.PNG)
 
