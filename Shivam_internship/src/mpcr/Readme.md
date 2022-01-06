@@ -7,6 +7,9 @@
 * To Collect and compare Temperature Readings of two Chambers  with their Threshold Values
 * To Repeat the above process for 10 iterations
 
+### Process Flow
+![mpcr algo](https://user-images.githubusercontent.com/95620523/147822555-e5365c78-a7ac-43a7-b8a6-b17c08baea4c.jpg)
+
 #### COMPONENTS
 
 * Thermocouple AD595 (1)
@@ -24,3 +27,4 @@
 
 ### OUTPUT 
 
+![Capturem](https://user-images.githubusercontent.com/95620523/147822559-d652cab9-d62b-4cc5-a30e-7b409f64c2c7.PNG)
