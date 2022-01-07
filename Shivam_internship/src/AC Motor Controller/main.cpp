@@ -1,54 +1,35 @@
-#include <Arduino.h>
-#define SWITCH1 4
-#define ENCA 2 
-#define ENCB 3 
-#define ENABLE 5
-#define MOTORPIN2 6
-#define MOTORPIN1 7
-volatile int pos = 0;
-void readEncoder();
+#include<Arduino.h>
+#define TRIGGERPIN 7
+
+long RUN_DELAY  = 3600000;
+long STOP_DELAY = 900000;
+unsigned long RUNNING_FUTURE_TIME = 0;
+unsigned long RUNNING_CURRRENT_TIME = 0;
+unsigned long HALT_FUTURE_TIME = 0;
+unsigned long HALT_CURRRENT_TIME = 0;
 
 void setup() 
 {
-  Serial.begin(9600);
-  pinMode(SWITCH1, INPUT);
-  pinMode(ENCA,INPUT);
-  pinMode(ENCB,INPUT);
-  pinMode(ENABLE,OUTPUT);
-  pinMode(MOTORPIN1,OUTPUT);
-  pinMode(MOTORPIN2,OUTPUT); 
-  attachInterrupt(digitalPinToInterrupt(ENCA),readEncoder,RISING);
+ pinMode(LED_BUILTIN, OUTPUT);
+ pinMode(TRIGGERPIN, OUTPUT);
+ digitalWrite(TRIGGERPIN, LOW);
 }
 
 void loop() 
 {
- while(pos <= 3000)
+ RUNNING_CURRRENT_TIME = millis();
+ RUNNING_FUTURE_TIME = RUNNING_CURRRENT_TIME + RUN_DELAY;
+ while( millis() <= RUNNING_FUTURE_TIME )
  {
-   Serial.println("MOVING UP");
-   digitalWrite(MOTORPIN1, HIGH);
-   digitalWrite(MOTORPIN2, LOW);
-   digitalWrite(ENABLE, HIGH);
- } 
-
- while(pos >= 3000)
- {
-   Serial.println("MOVING DOWN");
-   digitalWrite(MOTORPIN1, LOW);
-   digitalWrite(MOTORPIN2, HIGH);
-   digitalWrite(ENABLE, HIGH);
+  digitalWrite(LED_BUILTIN, HIGH);
+  digitalWrite(TRIGGERPIN, HIGH);
  }
 
-}
-
-void readEncoder()
-{
-  int b = digitalRead(ENCB);
-  if(b > 0)
-  {
-    pos++;
-  }
-  else
-  {
-    pos--;
-  }
+ HALT_CURRRENT_TIME = millis();
+ HALT_FUTURE_TIME = RUNNING_FUTURE_TIME + STOP_DELAY;
+ while( millis() <= HALT_FUTURE_TIME )
+ {
+  digitalWrite(LED_BUILTIN, LOW);
+  digitalWrite(TRIGGERPIN, LOW);
+ } 
 }
