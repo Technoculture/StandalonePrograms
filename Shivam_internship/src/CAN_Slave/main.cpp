@@ -18,11 +18,8 @@ void DOWN();
 void UP();
 void DRIVER();
 int CYCLE = 1;
-bool idle_flag = 0;
-bool bit_check = 0;
-bool process = 0;
-bool single1 = 0;
-bool single2 = 0;
+bool flag = 0;
+
 const int SPI_CS_PIN = 8;
 MCP_CAN CAN(SPI_CS_PIN);
 Servo myservo[2];
@@ -125,10 +122,20 @@ void loop()
         if (CYCLE <= 6)                              // count CYCLES
           {
            DOWN();                                  // move DOWN
+           if(flag)
+           {
+            estate = STOP;
+            break;
+           }
            DRIVER();                                // set servos to angle according to data
            Serial.print("SERVO SET TO:");           // serial print status of cycle
            Serial.println(CYCLE);
            UP();                                    // move DOWN
+           if(flag)
+           {
+            estate = STOP;
+            break;
+           }
            Serial.println("EXTRACTING DNA");
            CurrentTime = millis();                   //   delay
            FutureTime = CurrentTime + DELAY;
@@ -145,7 +152,7 @@ void loop()
                   estate = STOP;
                   break;
                  }
-              }
+               }
             }
            if (CYCLE == 6)                                   // if last cycle
            {
@@ -163,6 +170,7 @@ void loop()
 
   case STOP:
   {
+    flag = 0;
     digitalWrite(LED_BUILTIN, LOW); 
     Serial.println("RESETTING");             // print status
     if (digitalRead(SWITCH1) == HIGH)                    // if motor is somewhere in mid move DOW
@@ -171,16 +179,18 @@ void loop()
       digitalWrite(MOTORPIN1, LOW);
       digitalWrite(MOTORPIN2, HIGH);
       analogWrite(PWMPIN, SPEED);
+      estate = STOP;
     }
-    if(digitalRead(SWITCH1) == LOW)                                             // if motor reaches DOWN
+    else                                            // if motor reaches DOWN
     {
       analogWrite(PWMPIN, 0);                           // then stop
       myservo[0].write(HOME);                           // set servos at home pos
       myservo[1].write(HOME);
       Serial.println("IDLE STATE"); 
-      
+      estate = IDLE;
     }
-    estate = IDLE; 
+   
+     
   }
   break;
 
@@ -254,7 +264,7 @@ void DOWN()                                             // DOWN logic
       if (buf[0] == 2)
       {
         Serial.println("System INTERRUPTED while going DOWN");
-        estate = STOP;
+        flag = 1;
         break;
       }
     }
@@ -279,10 +289,15 @@ void UP()
       if (buf[0] == 2)
       {
         Serial.println("System INTERRUPTED while going UP");
-        estate = STOP;
+       flag = 1;
         break;
       }
     }
   }
   analogWrite(PWMPIN, 0);
 }
+
+
+
+
+
