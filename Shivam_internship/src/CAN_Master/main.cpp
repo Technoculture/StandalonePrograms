@@ -1,28 +1,23 @@
-#include <Arduino.h>
-#include <Servo.h>
 #include <mcp_can.h>
 #include <SPI.h>
-#define EXT_INT 8
 const int SPI_CS_PIN = 7;
-volatile uint8_t statemachine = IDLE;
-volatile bool pushbISRflag = 0;
+volatile bool ISR_Flag = 0;
 MCP_CAN CAN(SPI_CS_PIN);
-void FUNCTION();
 
 enum state
- {
+{
   IDLE = 0,
   START,
   RUNNING,
   STOP
- };
-
+};
+uint8_t statemachine = IDLE;
 
 void setup()
 {
-  pinMode(EXT_INT, INPUT);
+  pinMode(8, INPUT);
   Serial.begin(115200);
-  attachInterrupt(digitalPinToInterrupt(EXT_INT), FUNCTION, RISING);
+  attachInterrupt(digitalPinToInterrupt(8), FUNCTION, RISING);
   while (!Serial);
   while (CAN_OK != CAN.begin(CAN_500KBPS))
   {
@@ -39,57 +34,90 @@ void loop()
 {
   switch (statemachine)
   {
-   case IDLE:
-      unsigned char len = 0;
-      unsigned char buf[1];
-      if (CAN_MSGAVAIL == CAN.checkReceive())
-       {
-        CAN.readMsgBuf(&len, buf);
-        unsigned long canId = CAN.getCanId();
-         if (buf[0] == 0)
-         {
-          Serial.println("idle mila");
-         }
-       }
-       break;
-       
-   case START:
-    if(pushbISRflag)
+    case IDLE:
       {
-      CAN.sendMsgBuf(0xAA, 0, 1, &start);
-      Serial.println("start bit bheja");
-      pushbISRflag = 0;
+        unsigned char len = 0;
+        unsigned char buf[1];
+        if (CAN_MSGAVAIL == CAN.checkReceive())
+        {
+          CAN.readMsgBuf(&len, buf);
+          unsigned long canId = CAN.getCanId();
+          if (buf[0] == 0)
+          {
+            Serial.println("Idle Received");
+          }
+        }
+        if (ISR_Flag)
+        {
+          statemachine = START;
+        }
+        else
+        {
+          statemachine = IDLE;
+        }
       }
       break;
 
-   case RUNNING:
-      unsigned char len = 0;
-      unsigned char buf[1];
-      if (CAN_MSGAVAIL == CAN.checkReceive())
-       {
-        CAN.readMsgBuf(&len, buf);
-        unsigned long canId = CAN.getCanId();
-         if (buf[0] == 2)
-         {
-          Serial.println("Running mila");
-         }
-       }
-       break;
-       
-   case STOP:
-    if(pushbISRflag)
+    case START:
       {
-      CAN.sendMsgBuf(0xAA, 0, 1, &halt);
-      Serial.println("stop bit bheja");
-      statemachine = IDLE;
-      pushbISRflag = 0;
+        if (ISR_Flag)
+        {
+          CAN.sendMsgBuf(0xAA, 0, 1, &initialize);
+          Serial.println("Start bit sent");
+          ISR_Flag = 0;
+          statemachine = RUNNING;
+        }
       }
-     break;     
+      break;
+
+    case RUNNING:
+      {
+        unsigned char len = 0;
+        unsigned char buf[1];
+        if (ISR_Flag)
+        {
+          statemachine = STOP;
+        }
+        else
+        {
+          statemachine = RUNNING;
+        }
+
+        if (CAN_MSGAVAIL == CAN.checkReceive())
+        {
+          CAN.readMsgBuf(&len, buf);
+
+
+          
+          unsigned long canId = CAN.getCanId();
+          if (buf[0] == 2)
+          {
+            Serial.println("EXTRACTION IN PROCESS");
+          }
+          else if (buf[0] == 3)
+          {
+            Serial.println("DNA EXTRACTION COMPLETE");
+            statemachine = IDLE;
+          }
+        }
+      }
+      break;
+
+    case STOP:
+      {
+        if (ISR_Flag)
+        {
+          CAN.sendMsgBuf(0xAA, 0, 1, &terminate);
+          Serial.println("STOP BIT SENT");
+          statemachine = IDLE;
+          ISR_Flag = 0;
+        }
+      }
+      break;
   }
 }
 
 void FUNCTION()
 {
-  statemachine++;
-  pushbISRflag = 1;
+  ISR_Flag = 1;
 }
