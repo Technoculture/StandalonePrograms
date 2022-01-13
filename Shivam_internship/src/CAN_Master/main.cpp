@@ -1,23 +1,15 @@
-#include <mcp_can.h>
-#include <SPI.h>
+#include"REQLIBS.h"
+
 const int SPI_CS_PIN = 7;
 volatile bool ISR_Flag = 0;
 MCP_CAN CAN(SPI_CS_PIN);
-
-enum state
-{
-  IDLE = 0,
-  START,
-  RUNNING,
-  STOP
-};
 uint8_t statemachine = IDLE;
 
 void setup()
 {
-  pinMode(8, INPUT);
+  pinMode(EXT_INT, INPUT);
   Serial.begin(115200);
-  attachInterrupt(digitalPinToInterrupt(8), FUNCTION, RISING);
+  attachInterrupt(digitalPinToInterrupt(EXT_INT), FUNCTION, RISING);
   while (!Serial);
   while (CAN_OK != CAN.begin(CAN_500KBPS))
   {
@@ -41,7 +33,7 @@ void loop()
         if (CAN_MSGAVAIL == CAN.checkReceive())
         {
           CAN.readMsgBuf(&len, buf);
-          unsigned long canId = CAN.getCanId();
+          // unsigned long canId = CAN.getCanId();
           if (buf[0] == 0)
           {
             Serial.println("Idle Received");
@@ -89,7 +81,7 @@ void loop()
 
 
           
-          unsigned long canId = CAN.getCanId();
+          // unsigned long canId = CAN.getCanId();
           if (buf[0] == 2)
           {
             Serial.println("EXTRACTION IN PROCESS");

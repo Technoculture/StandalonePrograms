@@ -1,37 +1,14 @@
-#include <mcp_can.h>
-#include <SPI.h>
-#include<Servo.h>
-#define PWMPIN    3
-#define SWITCH1   4             //lower limit switch
-#define SWITCH2   5             //upper limit switch 
-#define MOTORPIN1 6
-#define MOTORPIN2 7
-#define SERVOPIN1 9
-#define SERVOPIN2 10
-#define BAUDRATE 115200
-#define DELAY 5000
-#define HOME 0
-#define SPEED 200
+#include"REQLIBS.h"
+
 unsigned long FutureTime  = 0;
 unsigned long CurrentTime = 0;
-void DOWN();
-void UP();
-void DRIVER();
 int CYCLE = 1;
 bool flag = 0;
-
+uint8_t estate = IDLE;
 const int SPI_CS_PIN = 8;
 MCP_CAN CAN(SPI_CS_PIN);
 Servo myservo[2];
-enum process
-{
-  IDLE = 0,
-  START,
-  RUNNING,
-  STOP,
-  COMPLETE
-};
-uint8_t estate = IDLE;
+
 
 void setup()
 {
@@ -69,8 +46,8 @@ void loop()
  {
   case IDLE:
   {
-    unsigned char len = 0;
-    unsigned char buf[1];
+    // unsigned char len = 0;
+    // unsigned char buf[1];
     if (CAN_MSGAVAIL == CAN.checkReceive())
     {
       estate = START;
@@ -87,7 +64,7 @@ void loop()
   case START:
   {
     CAN.readMsgBuf(&len, buf);
-    unsigned long canId = CAN.getCanId();
+    // unsigned long canId = CAN.getCanId();
     if (buf[0] == 1)
     {
       Serial.println("----------Start is received------------");
@@ -108,7 +85,7 @@ void loop()
     if (CAN_MSGAVAIL == CAN.checkReceive())
     {
       CAN.readMsgBuf(&len, buf);
-      unsigned long canId = CAN.getCanId();
+      // unsigned long canId = CAN.getCanId();
       if (buf[0] == 2)
       {
        Serial.println("----------Stop is received------------");
@@ -145,7 +122,7 @@ void loop()
               if (CAN_MSGAVAIL == CAN.checkReceive())
                {
                CAN.readMsgBuf(&len, buf);
-               unsigned long canId = CAN.getCanId();
+              //  unsigned long canId = CAN.getCanId();
                  if (buf[0] == 2)
                  {
                   Serial.println("System INTERRUPTED while EXTRACTION");
@@ -260,7 +237,7 @@ void DOWN()                                             // DOWN logic
     if (CAN_MSGAVAIL == CAN.checkReceive())
     {
       CAN.readMsgBuf(&len, buf);
-      unsigned long canId = CAN.getCanId();
+      // unsigned long canId = CAN.getCanId();
       if (buf[0] == 2)
       {
         Serial.println("System INTERRUPTED while going DOWN");
@@ -285,7 +262,7 @@ void UP()
     if (CAN_MSGAVAIL == CAN.checkReceive())
     {
       CAN.readMsgBuf(&len, buf);
-      unsigned long canId = CAN.getCanId();
+      // unsigned long canId = CAN.getCanId();
       if (buf[0] == 2)
       {
         Serial.println("System INTERRUPTED while going UP");
@@ -296,8 +273,3 @@ void UP()
   }
   analogWrite(PWMPIN, 0);
 }
-
-
-
-
-
