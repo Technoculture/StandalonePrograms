@@ -47,6 +47,7 @@
 
 #### CIRCUIT DIAGRAM
 
+![mpcr slave](https://user-images.githubusercontent.com/95620523/149564383-c9ad05ac-30ad-4b43-978b-128c85e6290d.jpeg)
 
 
 #### STATE DIAGRAM
@@ -70,5 +71,6 @@
                     └───────────┘
 #### OUTPUT
 
+![CKT](https://user-images.githubusercontent.com/95620523/149564391-758f4083-f900-4975-bd86-2d6bbe480985.jpeg)
 
 
