@@ -19,11 +19,11 @@
 | Sr No |         Part Name          |                Mfg Number                | Quantity |
 | :---: | :------------------------: | :--------------------------------------: | :------: |
 |   1   |        Arduino Due         | [A000062](https://www.digikey.in/en/products/detail/arduino/A000062/3712582) |    1     |
-|   2   | MCP2515 Transceiver Module |                                          |    1     |
-|   3   |   N20 Motor with Encoder   |                                          |    1     |
-|   4   |   TB6112fng Motor driver   |                                          |    1     |
-|   5   |      SG90 Servo Motor      |                                          |    2     |
-|   6   |    Optical Limit Switch    |                                          |    1     |
+|   2   | MCP2515 Transceiver Module | [Module](https://robu.in/product/mcp2515-can-module-tja1050-receiver-spi-51-single-chip-program-routine-arduino/) |    1     |
+|   3   |   N20 Motor with Encoder   | [ 470827](https://robu.in/product/n20-6v-30rpm-micro-metal-gear-motor-with-encoder/) |    1     |
+|   4   |   TB6112fng Motor driver   | [43846](https://robu.in/product/motor-driver-tb6612fng-module-performance-ultra-small-volume-3-pi-matching-performance-ultra-l298n/) |    1     |
+|   5   |      SG90 Servo Motor      | [Tower Pro](https://robu.in/product/towerpro-sg90-9g-mini-servo-9-gram/) |    2     |
+|   6   |    Optical Limit Switch    | [12078](https://robu.in/product/optical-endstop-light-control-limit-optical-switch/) |    1     |
 
 
 
@@ -54,6 +54,13 @@
 
 
 
+##### Note: 
+ Short the 120 ohm Termination resistor on MCP2515
+
+On Pin 4 Optical Limit Switch is connected
+
+
+
 #### STATE DIAGRAM
 
 
@@ -63,3 +70,4 @@
 
 
 
+#### Serial Monitor Output
