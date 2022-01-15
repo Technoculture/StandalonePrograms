@@ -42,8 +42,11 @@
 
 ##### Note: 
  *Short the 120 ohm Termination resistor on MCP2515*
+ 
  *10K Pull Down Resistor is Connected between Pin 7 and GND terminal of Due  Board*
+ 
  *CAN_H of master conected to CAN_H of slave*
+ 
  *CAN_L of master conected to CAN_L of slave*
 
 
