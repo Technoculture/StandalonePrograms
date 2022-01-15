@@ -54,7 +54,8 @@
 |         ----          |   INT   |
 
 #### CIRCUIT DIAGRAM
-![dna slave](https://user-images.githubusercontent.com/95620523/149617048-62d72399-6395-453b-8897-989682543b9f.jpeg)
+![circuit](https://user-images.githubusercontent.com/95620523/149622918-27a093a9-c865-462d-86c7-1c7ea2c42668.jpeg)
+
 
 
 
