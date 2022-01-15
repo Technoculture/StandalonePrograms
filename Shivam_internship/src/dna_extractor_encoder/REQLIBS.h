@@ -8,6 +8,7 @@
 #define MOTORPIN2 7
 #define SERVOPIN1 9
 #define SERVOPIN2 10
+#define ENCA 13
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
 #define BAUDRATE 9600
 #define DELAY 5000

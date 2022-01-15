@@ -1,5 +1,5 @@
 #include"REQLIBS.h"
-#define ENCA 13
+
 unsigned long FutureTime  = 0;
 unsigned long CurrentTime = 0;
 volatile bool flag = 0;
