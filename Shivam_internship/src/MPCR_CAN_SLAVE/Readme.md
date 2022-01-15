@@ -51,7 +51,9 @@
 
 ##### Note: 
 *Short the 120 ohm Termination resistor on MCP2515*
+
 *CAN_H of master conected to CAN_H of slave*
+
 *CAN_L of master conected to CAN_L of slave*
 
 
