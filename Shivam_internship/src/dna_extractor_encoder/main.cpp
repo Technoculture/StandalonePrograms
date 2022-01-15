@@ -1,5 +1,4 @@
 #include"REQLIBS.h"
-
 unsigned long FutureTime  = 0;
 unsigned long CurrentTime = 0;
 volatile bool flag = 0;
@@ -13,7 +12,7 @@ Servo myservo[2];
 void setup() 
 {
  pinMode(SWITCH1, INPUT);
- pinMode(ENCA, INPUT); 
+ pinMode(SWITCH2, INPUT); 
  pinMode(INTERRUPT, INPUT);
  pinMode(MOTORPIN1, OUTPUT);
  pinMode(MOTORPIN2, OUTPUT); 
@@ -25,7 +24,6 @@ void setup()
  digitalWrite(MOTORPIN1, LOW);               // initially stop
  digitalWrite(MOTORPIN2, LOW); 
  attachInterrupt(digitalPinToInterrupt (INTERRUPT), FUNCTION, RISING);
- attachInterrupt(digitalPinToInterrupt (ENCA), ENCODER, RISING);
  Serial.begin(BAUDRATE);
 }
 
@@ -155,8 +153,7 @@ void DOWN()                                             // DOWN logic
 
 void UP()
 {
-    pos=0;
-    while(pos<=6000)
+    while(digitalRead(SWITCH2) == LOW)
       {
       Serial.println("MOVING UP");
       digitalWrite(MOTORPIN1, HIGH);
@@ -170,9 +167,4 @@ void UP()
        }  
       }
       digitalWrite(PWMPIN,0);
-}
-
-void ENCODER()
-{
- pos++;
 }
