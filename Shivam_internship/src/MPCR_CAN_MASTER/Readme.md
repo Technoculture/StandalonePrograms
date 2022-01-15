@@ -50,6 +50,7 @@
 
 
 #### STATE DIAGRAM
+![state diagram](https://user-images.githubusercontent.com/95620523/149616853-e632bb4b-cc76-41a2-8e84-e6084c8e4a03.jpg)
 
 
 
@@ -60,4 +61,12 @@
 
 
 ### Serial Monitor Output
+![mpcr can](https://user-images.githubusercontent.com/95620523/149616880-2d70f512-ad49-4f78-975e-4f63607ad52d.PNG)
+
+![can2](https://user-images.githubusercontent.com/95620523/149616884-844125e8-ecc8-477a-8920-684ed4a3421d.png)
+
+![can complete](https://user-images.githubusercontent.com/95620523/149616892-239f5fa9-97da-4a52-a4da-3f1523a71a03.png)
+
+![can stop](https://user-images.githubusercontent.com/95620523/149616895-db3a3f31-26f4-4576-87b6-5df38605c1c7.png)
+
 
