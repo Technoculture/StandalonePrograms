@@ -48,11 +48,21 @@
 
 #### STATE DIAGRAM
 
+![state diagram](https://user-images.githubusercontent.com/95620523/149616972-23cfee4c-75dd-4760-8c42-d8ef76dd8642.jpg)
 
 
 #### OUTPUT
+![dna ckt](https://user-images.githubusercontent.com/95620523/149616997-8b518a8f-b183-4536-b54e-9d3a7fdddd5f.jpeg)
 
 
 
 #### Serial Monitor Output
+
+![DNA IDle](https://user-images.githubusercontent.com/95620523/149617008-cbdca264-6356-47c8-be30-022d41ea90ab.png)
+
+![dna Run](https://user-images.githubusercontent.com/95620523/149617015-a7a00f0a-b31e-4f94-822c-2e26d13bf827.png)
+
+![dna complete](https://user-images.githubusercontent.com/95620523/149617027-fa6e9d9b-d6a7-46c9-9ef8-c0c7cbce186d.png)
+
+![dna stop](https://user-images.githubusercontent.com/95620523/149617019-324da160-28f5-4db3-b4e1-6a8d2cbb7889.png)
 
