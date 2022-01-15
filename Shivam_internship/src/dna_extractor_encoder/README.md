@@ -31,7 +31,8 @@ Limit Switch
 
 #### CIRCUIT DIAGRAM
 
-![motor ckt](https://user-images.githubusercontent.com/95620523/149619012-fd164b52-8a31-4aa3-8bf4-d93d4773f31f.jpeg)
+![encoder ckt](https://user-images.githubusercontent.com/95620523/149623749-bed8b020-bcb6-498c-9df1-c756537bbc2f.jpeg)
+
 
 
 
