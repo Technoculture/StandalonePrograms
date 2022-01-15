@@ -7,7 +7,7 @@
 
 
 
-####Components:
+#### Components:
 
 Arduino Uno
 
@@ -30,10 +30,12 @@ Push Button
 
 #### CIRCUIT DIAGRAM
 
+![motor ckt](https://user-images.githubusercontent.com/95620523/149619012-fd164b52-8a31-4aa3-8bf4-d93d4773f31f.jpeg)
+
 
 
 
 #### OUTPUT
 
-
+![dna ckt](https://user-images.githubusercontent.com/95620523/149618992-c0fc656a-98ef-4695-880f-93f6d6b953cb.jpeg)
 
