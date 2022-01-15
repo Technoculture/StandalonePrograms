@@ -29,16 +29,16 @@
 
 #### Pin Configuration for Arduino DUE
 
-| (Arduino due) Pin Number |    Components attached    |
-| :----------------------: | :-----------------------: |
-|            2             |   Encoder Pin of Motor    |
-|            3             | PWMA Pin of Motor Driver  |
-|            4             |       Limit Switch        |
-|            6             | AIN1 Pin of Motor Driver  |
-|            7             | AIN2 Pin of Motor Driver  |
-|            9             | Signal Pin of Servo Motor |
-|            10            | Signal Pin of Servo Motor |
-|            13            |        LED_BUILTIN        |
+| (Arduino due) Pin Number |    Components attached     |
+| :----------------------: | :------------------------: |
+|            2             |    Encoder Pin of Motor    |
+|            3             |  PWMA Pin of Motor Driver  |
+|            4             |        Limit Switch        |
+|            6             |  AIN1 Pin of Motor Driver  |
+|            7             |  AIN2 Pin of Motor Driver  |
+|            9             | Signal Pin of Servo Motor1 |
+|            10            | Signal Pin of Servo Motor2 |
+|            13            |        LED_BUILTIN         |
 
 | (Arduino due) SPI PIN | MCP2515 |
 | :-------------------: | :-----: |
@@ -55,11 +55,11 @@
 
 
 
-##### Note: 
- Short the 120 ohm Termination resistor on MCP2515
-
-On Pin 4 Optical Limit Switch is connected
-
+##### <u>Note:</u> 
+*Short the 120 ohm Termination resistor on MCP2515*
+*On Pin 4 Optical Limit Switch is connected*
+*CAN_H of master conected to CAN_H of slave*
+*CAN_L of master conected to CAN_L of slave*
 
 
 #### STATE DIAGRAM
@@ -73,16 +73,26 @@ On Pin 4 Optical Limit Switch is connected
 ![dna ckt](https://user-images.githubusercontent.com/95620523/149617058-f25d35bc-2dea-411b-86e9-3304555bb4db.jpeg)
 
 
+
 #### Serial Monitor Output
 
+<u>IDLE MODE</u>: In this state Slave sends Idle status to Master and Master receives that Can msg
 ![DNA IDle](https://user-images.githubusercontent.com/95620523/149617086-b3876921-fcc1-445c-be07-666994dce450.png)
 
 
+
+<u> RUNNING MODE</u>: In this State an interrupt connected to master is being trigerred externally in response to which Master sends "Start" command to Slave.
+Accordingly Slave Moves to Running State and Starts the Process and keeps Sending Status to master.
 ![dna Run](https://user-images.githubusercontent.com/95620523/149617083-2ea7101c-4b09-46e3-98c6-1bcd4ba208bb.png)
 
 
+
+<u>COMPLETE MODE:</u> In this state the process terminates naturally and slave then sends Complete command to master and both transit in Idle state
 ![dna complete](https://user-images.githubusercontent.com/95620523/149617077-33322a12-bbd0-4da0-8a97-1165322403c1.png)
 
 
+
+<u>STOP MODE</u>: In this state the process is externally interrupted, and the masters sends Stop Command to Slave.
+In response to that slave interrupts the process and sets all parameters to initial and then transits to Idle mode
 ![dna stop](https://user-images.githubusercontent.com/95620523/149617065-835ebb6d-6a00-4df7-98a4-268d608bd9bf.png)
 
