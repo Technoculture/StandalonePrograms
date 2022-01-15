@@ -51,6 +51,7 @@
 |         ----          |   INT   |
 
 #### CIRCUIT DIAGRAM
+![dna slave](https://user-images.githubusercontent.com/95620523/149617048-62d72399-6395-453b-8897-989682543b9f.jpeg)
 
 
 
@@ -62,12 +63,26 @@ On Pin 4 Optical Limit Switch is connected
 
 
 #### STATE DIAGRAM
+![slave](https://user-images.githubusercontent.com/95620523/149617053-f95b3988-c41a-49a7-b675-df2603ced7e9.jpg)
 
 
 
 
 #### OUTPUT
 
+![dna ckt](https://user-images.githubusercontent.com/95620523/149617058-f25d35bc-2dea-411b-86e9-3304555bb4db.jpeg)
 
 
 #### Serial Monitor Output
+
+![DNA IDle](https://user-images.githubusercontent.com/95620523/149617086-b3876921-fcc1-445c-be07-666994dce450.png)
+
+
+![dna Run](https://user-images.githubusercontent.com/95620523/149617083-2ea7101c-4b09-46e3-98c6-1bcd4ba208bb.png)
+
+
+![dna complete](https://user-images.githubusercontent.com/95620523/149617077-33322a12-bbd0-4da0-8a97-1165322403c1.png)
+
+
+![dna stop](https://user-images.githubusercontent.com/95620523/149617065-835ebb6d-6a00-4df7-98a4-268d608bd9bf.png)
+
