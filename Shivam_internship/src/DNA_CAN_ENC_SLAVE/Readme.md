@@ -57,8 +57,11 @@
 
 ##### <u>Note:</u> 
 *Short the 120 ohm Termination resistor on MCP2515*
+
 *On Pin 4 Optical Limit Switch is connected*
+
 *CAN_H of master conected to CAN_H of slave*
+
 *CAN_L of master conected to CAN_L of slave*
 
 
