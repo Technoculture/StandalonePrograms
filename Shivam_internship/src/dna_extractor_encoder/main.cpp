@@ -1,22 +1,24 @@
 #include"REQLIBS.h"
+
 unsigned long FutureTime  = 0;
 unsigned long CurrentTime = 0;
 volatile bool flag = 0;
+volatile int pos = 0;
 void FUNCTION();
 void DOWN();
 void UP();
 void DRIVER();
+void ENCODER();
 int CYCLE = 1;
 Servo myservo[2];
 
 void setup() 
 {
  pinMode(SWITCH1, INPUT);
- pinMode(SWITCH2, INPUT); 
+ pinMode(ENCA, INPUT); 
  pinMode(INTERRUPT, INPUT);
  pinMode(MOTORPIN1, OUTPUT);
  pinMode(MOTORPIN2, OUTPUT); 
- pinMode(PWMPIN, OUTPUT);
  pinMode(SERVOPIN1, OUTPUT);
  pinMode(SERVOPIN2, OUTPUT); 
  myservo[0].attach(SERVOPIN1);       
@@ -24,6 +26,7 @@ void setup()
  digitalWrite(MOTORPIN1, LOW);               // initially stop
  digitalWrite(MOTORPIN2, LOW); 
  attachInterrupt(digitalPinToInterrupt (INTERRUPT), FUNCTION, RISING);
+ attachInterrupt(digitalPinToInterrupt (ENCA), ENCODER, RISING);
  Serial.begin(BAUDRATE);
 }
 
@@ -72,12 +75,12 @@ void loop()
     
       digitalWrite(MOTORPIN1, LOW);
       digitalWrite(MOTORPIN2, HIGH);
-      digitalWrite(PWMPIN, HIGH); 
      }
      else                                              // if motor reaches DOWN
      
      {
-      digitalWrite(PWMPIN,0);                            // then stop
+      digitalWrite(MOTORPIN1, LOW);
+      digitalWrite(MOTORPIN2, LOW);                            // then stop
       myservo[0].write(HOME);                           // set servos at home pos
       myservo[1].write(HOME);  
       Serial.println("IDLE STATE");                   // print status as idle
@@ -140,25 +143,26 @@ void DOWN()                                             // DOWN logic
       {
        Serial.println("MOVING DOWN");
        digitalWrite(MOTORPIN1, LOW);
-       digitalWrite(MOTORPIN2, HIGH);
-       digitalWrite(PWMPIN,HIGH); 
+       digitalWrite(MOTORPIN2, HIGH); 
        if(flag!= 1)                                   // amid this, if interrupt occurs 
         {
         Serial.print("INTERRUPT OCCURED");             // then print and break 
         break; 
         }  
       }     
-      digitalWrite(PWMPIN,0);                          // stop the motor
+      digitalWrite(MOTORPIN1, LOW);
+      digitalWrite(MOTORPIN2, LOW);                           // stop the motor
 }
 
 void UP()
 {
-    while(digitalRead(SWITCH2) == LOW)
+    pos=0;
+    while(pos<=6000)
       {
       Serial.println("MOVING UP");
       digitalWrite(MOTORPIN1, HIGH);
       digitalWrite(MOTORPIN2, LOW);
-      digitalWrite(PWMPIN,HIGH);
+      
 
        if(flag!= 1)
        {
@@ -166,5 +170,11 @@ void UP()
         break; 
        }  
       }
-      digitalWrite(PWMPIN,0);
+      digitalWrite(MOTORPIN1, LOW);
+      digitalWrite(MOTORPIN2, LOW); 
+}
+
+void ENCODER()
+{
+ pos++;
 }
