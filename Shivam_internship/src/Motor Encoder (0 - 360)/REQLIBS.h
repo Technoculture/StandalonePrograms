@@ -4,3 +4,6 @@
 #define MOTPIN2 7              
 #define BAUDRATE 115200
 #define DELAY 100                   // delay response of serial read
+
+void ENCODER();                           // function Declaration
+int degreeToPulse();                      // function Declaration

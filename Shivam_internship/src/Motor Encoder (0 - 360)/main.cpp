@@ -3,8 +3,7 @@
 volatile int pos = 0;              // position variable to count enoder pulses
 int Pulses = 0;
 int angle = 0;
-void ENCODER();                           // function Declaration
-int degreeToPulse();                      // function Declaration
+                   
 
 void setup()
 {
