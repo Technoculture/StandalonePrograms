@@ -28,8 +28,9 @@ N20 DC Motor
 |           GND            |   Ground of N20 motor    |
 
 #### CIRCUIT DIAGRAM
+![motor ckt](https://user-images.githubusercontent.com/95620523/149722588-c79a8d2f-b2d8-4b9b-add9-c01a37a2f80b.jpeg)
 
-![encoder ckt](https://user-images.githubusercontent.com/95620523/149722428-038229b0-6617-4ada-a0d5-5ed99ee20591.jpeg)
+
 
 
 #### OUTPUT
