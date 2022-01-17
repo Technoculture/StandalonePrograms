@@ -29,12 +29,11 @@ N20 DC Motor
 
 #### CIRCUIT DIAGRAM
 
-
-
-
+![encoder ckt](https://user-images.githubusercontent.com/95620523/149722428-038229b0-6617-4ada-a0d5-5ed99ee20591.jpeg)
 
 
 #### OUTPUT
 
+![encoderckt](https://user-images.githubusercontent.com/95620523/149722457-2c4a2d8a-52f3-43bf-aed1-5a05e2f56bfe.jpeg)
 
 
