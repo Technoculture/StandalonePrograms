@@ -1,20 +1,11 @@
-#include <Arduino.h>
-#include <Servo.h>
+#include"REQLIBS.h"
 
-#define SERVOPIN1 9
-#define SERVOPIN2 10
-#define HOME 90
-#define CHAMBER1POS  0
-#define CHAMBER2POS 180
-#define BAUDRATE 9600
 const int thermocouple = A2;
-Servo myservo[2];
-
 int adc_val;
 float y;
 int temperature;
 volatile byte flag = LOW;
-void InterruptFunc();
+
 
 void setup() 
 {

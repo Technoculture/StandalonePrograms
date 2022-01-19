@@ -1,14 +1,4 @@
-#include<Arduino.h>
-#define ENCA 2
-#define EXT_INT 3
-#define MOTPIN1 6
-#define MOTPIN2 7
-#define PULSES 3000
-#define BAUDRATE 115200
-volatile bool flag = 0;
-volatile int pos = 0;
-void FUNCTION();
-void ENCODER();
+#include"REQLIBS.h"
 
 void setup()
 {
@@ -16,41 +6,41 @@ void setup()
  pinMode(EXT_INT, INPUT);
  pinMode(MOTPIN1, OUTPUT); 
  pinMode(MOTPIN2, OUTPUT); 
- attachInterrupt(digitalPinToInterrupt(ENCA), ENCODER, RISING);
- attachInterrupt(digitalPinToInterrupt(EXT_INT), FUNCTION, RISING);
+ attachInterrupt(digitalPinToInterrupt(ENCA), ENCODER, RISING);              // interrupt for motor encoder
+ attachInterrupt(digitalPinToInterrupt(EXT_INT), FUNCTION, RISING);          //interrupt for push button
  Serial.begin(BAUDRATE);
 }
 
 void loop() 
 {
-  if(flag)
+  if(flag)                                               // if flag = 1
   {
-    if(pos<PULSES)
+    if(pos<PULSES)                                         // if pos is less than pulses
     {
       Serial.println(pos);
-      digitalWrite(MOTPIN1, HIGH);
+      digitalWrite(MOTPIN1, HIGH);                          // trigger the motor
       digitalWrite(MOTPIN2, LOW);
     }
     else
     {
-      digitalWrite(MOTPIN1, LOW);
+      digitalWrite(MOTPIN1, LOW);                         // else stop the motor
       digitalWrite(MOTPIN2, LOW);
     }
   }
   else
   {
-    digitalWrite(MOTPIN1, LOW);
+    digitalWrite(MOTPIN1, LOW);                     // if no interrupt stop the motor
     digitalWrite(MOTPIN2, LOW);
   }
 }
 
-void FUNCTION()
-{
-  flag = !flag;
-  pos = 0;
+void FUNCTION()                               // executes when external push button interrupt occurs
+{ 
+  flag = !flag;                               // invert flag
+  pos = 0;                                    // clear pos
 }
 
-void ENCODER()
+void ENCODER()                               // executes when ENCA interrupt occurs
 {
-  pos++;
+  pos++;                                     // increment pos
 }

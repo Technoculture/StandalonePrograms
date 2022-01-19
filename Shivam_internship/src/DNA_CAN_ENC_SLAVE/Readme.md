@@ -66,7 +66,8 @@
 
 
 #### STATE DIAGRAM
-![slave](https://user-images.githubusercontent.com/95620523/149617053-f95b3988-c41a-49a7-b675-df2603ced7e9.jpg)
+![slave](https://user-images.githubusercontent.com/95620523/149724055-9ec3868f-9156-4467-9742-9bd1c35d1060.jpg)
+
 
 
 

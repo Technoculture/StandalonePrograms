@@ -28,3 +28,7 @@
 ### OUTPUT 
 
 ![Capturem](https://user-images.githubusercontent.com/95620523/147822559-d652cab9-d62b-4cc5-a30e-7b409f64c2c7.PNG)
+
+
+
+<u>***Note:***</u> Instead of using external chamber heaters and temperature sensor, the above system is being solely tested via an external potentiometer which provides similar ADC Input to the microcontroller as expected from AD595 Temperature Sensor. The main Objective of this project was to design and implement the logic to make the system work accordingly.
